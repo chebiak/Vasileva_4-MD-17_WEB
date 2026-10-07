@@ -1,0 +1,112 @@
+:root{
+  --ink:#111; --paper:#f4f4f4; --mid:#a2a2a2;
+  --display:"Unbounded","Arial Black",Impact,sans-serif;
+  --text:"Onest","Helvetica Neue",Arial,sans-serif;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  /* ФОТО лежат в папке images/ — замените файлы или пути здесь */
+  --photo1:url('images/photo1.jpg');
+  --photo2:url('images/photo2.jpg');
+  --photo3:url('images/photo3.jpg');
+}
+*{box-sizing:border-box;margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--ink);color:#fff;font-family:var(--text);line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.panel{position:relative;max-width:1280px;margin:0 auto;overflow:hidden;background:var(--ink)}
+.panel::after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.35;mix-blend-mode:overlay;pointer-events:none}
+.light{background:var(--paper);color:var(--ink)}
+.light::after{opacity:.25;mix-blend-mode:multiply}
+
+/* винил */
+.vinyl{position:absolute;border-radius:50%;aspect-ratio:1;
+  background:radial-gradient(circle,#bbb 0 17%,#111 17.5% 19%,transparent 19.5%),
+  repeating-radial-gradient(circle,#161616 0 2px,#2c2c2c 3px 4px);
+  box-shadow:0 0 0 1px #000}
+.vinyl::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 20deg,transparent,rgba(255,255,255,.18),transparent 25%,transparent 50%,rgba(255,255,255,.18) 62%,transparent 75%)}
+.vinyl::after{content:"";position:absolute;left:50%;top:50%;width:3%;aspect-ratio:1;border-radius:50%;background:#000;transform:translate(-50%,-50%)}
+.vinyl.ghost{opacity:.5;filter:grayscale(1)}
+
+/* фото-заглушка */
+.photo{background:var(--photo1) center/cover,linear-gradient(160deg,#3a3a3a,#0c0c0c);filter:grayscale(1) contrast(1.15);position:relative}
+.photo span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 .75rem var(--text);letter-spacing:.08em;color:#777;text-align:center;padding:.5rem}
+.photo.has span{display:none}
+
+/* HERO */
+.hero{min-height:min(720px,100svh);display:grid;place-items:center}
+nav{position:absolute;top:clamp(28px,5vw,56px);left:0;right:0;z-index:5;display:flex;justify-content:space-between;padding:0 clamp(24px,10vw,130px);font:700 .72rem var(--text)}
+nav div{display:flex;gap:clamp(14px,3vw,40px)}
+nav a:hover{text-decoration:underline;text-underline-offset:5px}
+.circle{position:absolute;width:min(480px,68vw);aspect-ratio:1;border-radius:50%;background:#fff;top:50%;left:50%;transform:translate(-50%,-48%);overflow:hidden}
+.circle .photo{position:absolute;inset:0;background-image:var(--photo1),linear-gradient(#ddd,#999);filter:grayscale(1) contrast(1.2)}
+.circle .photo span{color:#555}
+.circle .photo{background-size:cover;background-position:50% 18%}
+h1{position:relative;z-index:3;font:900 clamp(2.6rem,10.2vw,8.6rem)/.95 var(--display);letter-spacing:-.03em;text-align:center;mix-blend-mode:difference;color:#fff;padding:0 2vw;margin-top:8vh}
+.hero p{position:absolute;left:clamp(24px,10vw,130px);bottom:clamp(24px,5vw,56px);max-width:19ch;font-size:.72rem;z-index:4}
+.hero small{position:absolute;right:clamp(24px,5vw,56px);bottom:clamp(24px,5vw,56px);font-size:.72rem;z-index:4}
+.hero .vinyl{width:clamp(160px,26vw,320px);left:-8%;top:-8%;z-index:0}
+
+/* заголовки-контуры */
+.out{font:900 clamp(2.4rem,9vw,7rem)/1 var(--display);color:transparent;-webkit-text-stroke:1.5px currentColor;letter-spacing:-.02em;text-transform:lowercase}
+
+/* TWO COLUMN */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
+.split>.photo{min-height:360px}
+.split .body{position:relative;padding:clamp(24px,4vw,48px);z-index:2}
+.split .body .vinyl{width:min(78%,420px);right:-6%;bottom:6%;z-index:-1}
+.list{list-style:none;padding:0;margin-top:clamp(28px,5vw,64px);display:grid;gap:clamp(22px,4vw,48px)}
+.list li{display:grid;grid-template-columns:3.2rem 1fr;gap:1rem;align-items:start;font-size:.9rem;max-width:46ch}
+.list li::before{content:counter(n) ".";counter-increment:n;font:400 1.8rem/1 var(--display);color:transparent;-webkit-text-stroke:1px currentColor;opacity:.55}
+.list{counter-reset:n}
+.list b{display:block;font-weight:700;margin-bottom:.15rem}
+.hits{font:500 1.35rem/1.2 var(--text)}
+.hits li{align-items:center}
+.hits li::before{font-size:2rem}
+
+/* ИСТОРИЯ / ТУРЫ / НАГРАДЫ */
+.info{padding:clamp(28px,6vw,80px)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(28px,5vw,64px);margin-top:clamp(28px,5vw,56px)}
+.cols h3{font:700 1rem var(--display);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid #fff}
+.cols p,.cols li{font-size:.88rem;color:#d6d6d6;margin-bottom:.7rem}
+.cols ul{list-style:none;padding:0}
+.cols li span{display:inline-block;min-width:3.4rem;margin-right:.6rem;vertical-align:top;color:#fff;font-weight:700}
+
+/* КОНТАКТЫ */
+.contact{padding:clamp(40px,8vw,110px) clamp(24px,6vw,80px);text-align:center}
+.contact .out{color:transparent;-webkit-text-stroke-color:#fff}
+.contact a.big{display:inline-block;margin-top:2rem;font:700 clamp(1rem,3vw,1.9rem) var(--display);border-bottom:2px solid #fff;padding-bottom:.3rem}
+.contact a.big:hover{background:#fff;color:var(--ink)}
+.social{display:flex;justify-content:center;gap:clamp(16px,4vw,44px);margin-top:2.5rem;font-size:.8rem;font-weight:700;flex-wrap:wrap}
+
+@media(max-width:760px){
+  .split{grid-template-columns:1fr}
+  .split.flip>.photo{order:2}
+  nav{flex-direction:column;gap:10px;align-items:center}
+  .hero p{display:none}
+  .hero{min-height:620px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ===== ДЕСКТОП 1920×1080: каждый блок — один экран 16:9 и масштабируется от 1000px до 1920px ===== */
+@media(min-width:1000px){
+  .panel{width:100%;max-width:1920px;aspect-ratio:16/9;margin:0 auto}
+  .hero,.split{min-height:0}
+  .hero .circle{width:clamp(420px,45vw,860px)}
+  .hero .vinyl{width:clamp(220px,26vw,500px)}
+  h1{font-size:clamp(4rem,10.2vw,12.25rem)}
+  nav{font-size:clamp(.72rem,.85vw,1.05rem);padding:0 clamp(40px,10vw,190px)}
+  .hero p,.hero small{font-size:clamp(.72rem,.8vw,1rem)}
+  .hero p{left:clamp(40px,10vw,190px)}
+  .out{font-size:clamp(3rem,7.4vw,9rem)}
+  .split .body{padding:clamp(32px,3.5vw,72px)}
+  .list li{font-size:clamp(.9rem,1.05vw,1.35rem);max-width:48ch;grid-template-columns:clamp(3.2rem,4vw,5rem) 1fr}
+  .list li::before{font-size:clamp(1.8rem,2.4vw,3.2rem)}
+  .hits{font-size:clamp(1.35rem,1.9vw,2.4rem)}
+  .info,.contact{display:flex;flex-direction:column;justify-content:center}
+  .cols{grid-template-columns:1fr 1.6fr}
+  .cols h3{font-size:clamp(1rem,1.3vw,1.7rem)}
+  .cols p,.cols li{font-size:clamp(.88rem,1.05vw,1.35rem)}
+  .contact a.big{align-self:center;font-size:clamp(1.2rem,2.4vw,3.2rem)}
+  .social{font-size:clamp(.8rem,1vw,1.3rem)}
+}
